@@ -1,0 +1,97 @@
+spring:
+  application:
+    name: openlib-backend
+
+  # ── PostgreSQL ──
+  datasource:
+    url: jdbc:postgresql://localhost:5432/openlib_db
+    username: openlib_user
+    password: openlib_pass
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  # ── JPA / Hibernate ──
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: public
+
+  # ── Flyway ──
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+  # ── Redis ──
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 5000ms
+
+  # ── Cache ──
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000   # 10 minutos en ms
+
+# ── Servidor ──
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# ── JWT ──
+openlib:
+  jwt:
+    secret: "3d6f1a9b8e2c4f7d0a5b3e8c1d4f7a2b9e6c3d0f7a4b1e8c5d2f9a6b3e0c7d4"
+    access-token-expiration: 900000      # 15 minutos en ms
+    refresh-token-expiration: 604800000  # 7 días en ms
+  signed-url:
+    secret: "7f4a2b9e6c3d0f1a8b5e2c9d4f7a1b3e6c0d7f4a2b9e6c3d0f1a8b5e2c9d4f7a"
+    expiration-minutes: 5
+  storage:
+    base-path: "./storage/books"
+
+# ── Actuator ──
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# ── OpenAPI / Swagger ──
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+  info:
+    title: "OpenLib Market API"
+    version: "1.0.0-MVP"
+    description: "Sistema de Gestión de Activos Digitales Académicos"
+
+# ── Logging ──
+logging:
+  level:
+    com.openlib: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
