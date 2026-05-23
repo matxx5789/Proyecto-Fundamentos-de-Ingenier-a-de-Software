@@ -1,0 +1,12 @@
+-- =========================================================
+-- V2: Datos semilla manejados por DataInitializer.java
+-- =========================================================
+-- Los datos de demo (usuarios, categorías, etiquetas y libros)
+-- son insertados automáticamente al iniciar la aplicación por
+-- com.openlib.config.DataInitializer usando BCryptPasswordEncoder.
+--
+-- Usuarios demo:
+--   admin@openlib.com  / Admin1234!   (ADMIN)
+--   seller@openlib.com / Seller1234!  (SELLER)
+--   buyer@openlib.com  / Buyer1234!   (BUYER)
+-- =========================================================

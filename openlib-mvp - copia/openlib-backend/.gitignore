@@ -1,0 +1,40 @@
+# ── Compilados ──
+target/
+*.class
+*.jar
+*.war
+
+# ── Maven ──
+.mvn/
+!.mvn/wrapper/maven-wrapper.properties
+mvn.cmd
+
+# ── IDE ──
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.project
+.classpath
+.settings/
+
+# ── Spring Boot ──
+*.log
+logs/
+
+# ── Almacenamiento local de archivos ──
+storage/
+test-storage/
+
+# ── Variables de entorno ──
+.env
+*.env.local
+
+# ── Sistema Operativo ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Docker ──
+docker-compose.override.yml
