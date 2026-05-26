@@ -57,4 +57,25 @@ public class CartService {
     public void clearCart(Long userId) {
         cartItemRepository.deleteByUserId(userId);
     }
+
+    @Transactional
+    public void cloneCart(Long sourceUserId, Long targetUserId) {
+        List<CartItem> sourceItems = cartItemRepository.findByUserId(sourceUserId);
+        
+        Long finalTargetId = (targetUserId != null) ? targetUserId : sourceUserId;
+        User targetUser = userRepository.findById(finalTargetId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", finalTargetId));
+
+        for (CartItem item : sourceItems) {
+            boolean exists = cartItemRepository.existsByUserIdAndBookId(finalTargetId, item.getBook().getId());
+            if (!exists) {
+                CartItem clonedItem = CartItem.builder()
+                        .user(targetUser)
+                        .book(item.getBook())
+                        // addedAt will be populated automatically by @Builder.Default with LocalDateTime.now()
+                        .build();
+                cartItemRepository.save(clonedItem);
+            }
+        }
+    }
 }

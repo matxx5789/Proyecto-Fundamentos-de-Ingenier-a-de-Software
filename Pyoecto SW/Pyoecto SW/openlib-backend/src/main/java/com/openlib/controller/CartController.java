@@ -50,4 +50,12 @@ public class CartController {
     public void clearCart(@AuthenticationPrincipal User user) {
         cartService.clearCart(user.getId());
     }
+
+    @PostMapping("/clone")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Clonar carrito de compras actual")
+    public void cloneCart(@AuthenticationPrincipal User user,
+                          @RequestParam(required = false) Long targetUserId) {
+        cartService.cloneCart(user.getId(), targetUserId);
+    }
 }
