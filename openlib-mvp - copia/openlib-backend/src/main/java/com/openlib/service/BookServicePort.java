@@ -30,5 +30,7 @@ public interface BookServicePort {
 
     Page<BookResponse> getAllForAdmin(int page, int size);
 
+    List<BookResponse> getNotApprovedBooks();
+
     BookResponse toResponse(Book book);
 }

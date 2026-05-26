@@ -88,6 +88,11 @@ public class BookServiceCacheProxy implements BookServicePort {
     }
 
     @Override
+    public java.util.List<BookResponse> getNotApprovedBooks() {
+        return delegate.getNotApprovedBooks();
+    }
+
+    @Override
     public BookResponse toResponse(com.openlib.domain.Book book) {
         return delegate.toResponse(book);
     }

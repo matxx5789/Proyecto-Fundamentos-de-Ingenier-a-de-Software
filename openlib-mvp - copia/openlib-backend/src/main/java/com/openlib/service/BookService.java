@@ -174,6 +174,12 @@ public class BookService implements BookServicePort {
         return bookRepository.findAll(pageable).map(this::toResponse);
     }
 
+    public List<BookResponse> getNotApprovedBooks() {
+        return bookRepository.findByStatusNot(BookStatus.APPROVED).stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
     // ── Mapper ────────────────────────────────────────────────────────────────
 
     public BookResponse toResponse(Book b) {

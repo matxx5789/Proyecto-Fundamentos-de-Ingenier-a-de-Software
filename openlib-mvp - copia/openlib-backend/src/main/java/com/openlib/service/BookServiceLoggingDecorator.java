@@ -97,6 +97,14 @@ public class BookServiceLoggingDecorator implements BookServicePort {
     }
 
     @Override
+    public List<BookResponse> getNotApprovedBooks() {
+        log.info("BookService.getNotApprovedBooks called");
+        List<BookResponse> result = delegate.getNotApprovedBooks();
+        log.info("BookService.getNotApprovedBooks returned {} books", result.size());
+        return result;
+    }
+
+    @Override
     public BookResponse toResponse(Book book) {
         return delegate.toResponse(book);
     }
