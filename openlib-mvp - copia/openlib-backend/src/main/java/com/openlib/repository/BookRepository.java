@@ -24,6 +24,8 @@ public interface BookRepository extends JpaRepository<Book, Long>,
 
     Page<Book> findBySellerId(Long sellerId, Pageable pageable);
 
+    List<Book> findByStatusNot(BookStatus status);
+
     boolean existsByIsbn(String isbn);
     Optional<Book> findByIsbn(String isbn);
 
