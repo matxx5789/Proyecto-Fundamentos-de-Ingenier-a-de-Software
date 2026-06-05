@@ -59,6 +59,8 @@ public class BuyerReportsController {
         ScrollPane scroll = new ScrollPane(reportArea);
         scroll.setFitToWidth(true);
         scroll.setStyle("-fx-background-color: transparent;");
+        
+        root.setTop(top);
         root.setCenter(scroll);
 
         loadReport();
